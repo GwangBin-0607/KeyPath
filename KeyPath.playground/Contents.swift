@@ -1,9 +1,39 @@
+import Foundation
 // 비즈니스 모델
 struct Product{
     let id:Int
     let name:String
     let price:Int
 }
+var keyPath: KeyPath<Product, Int> = \Product.id
+let shoe = Product(id: 1, name: "Shoe", price: 1234)
+print(shoe[keyPath: keyPath])
+keyPath = \Product.price
+print(shoe[keyPath: keyPath])
+
+let post: [String:Any] = [
+    "제목": "게시물",
+    "날짜": 20230124,
+    "등급": "3등급"
+]
+
+var path = "제목"
+print(post[path])
+path = "날짜"
+print(post[path])
+
+@objc protocol A {
+    @objc optional func test()->Void
+    func testTwo() -> Void
+}
+class B: A {
+    func testTwo() {
+        print("Test Two")
+    }
+}
+let b:A = B()
+b.test?()
+b.testTwo()
 let products: [Product] = [
     Product(id: 1, name: "Shoes", price: 1000),
     Product(id: 2, name: "Cap", price: 4000),
